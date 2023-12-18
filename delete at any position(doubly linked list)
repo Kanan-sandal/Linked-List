@@ -1,0 +1,79 @@
+#include<iostream>
+#include<climits>
+using namespace std;
+class node{
+    public:
+    int data;
+    node* next;
+    node* prev;
+    
+    node(int val){
+        data=val;
+        next=NULL;
+        prev=NULL;
+    }
+};
+
+void insertattail(node* &head,int val){
+    if(head==NULL){
+        insertathead(head,val);
+        return ;
+    }
+    node* n=new node(val);
+    node* temp=head;
+    
+    while(temp->next!=NULL){
+        temp=temp->next;
+    }
+    temp->next=n;
+    n->prev=temp;
+}
+
+void deleteatposition(node* &head,int pos){
+    if(head==NULL){
+        cout<<"list is empty. cannot delete any element"<<endl;
+        return;
+    }
+    if(pos<=0){
+        cout<<"invalid position . cannot delete any element"<<endl;
+        return;
+    }
+    if(pos==1){
+        node* temp=head;
+        head=head->next;
+        if(head!=NULL){
+            head->prev=NULL;
+        }
+        delete temp;
+        return;
+    }
+    int count=1;
+    node* curr=head;
+    
+    while(curr!=NULL && count<pos){
+        curr=curr->next;
+        count++;
+    }
+    if(curr==NULL){
+        cout<<"position exceeds size of the list"<<endl;
+        return;
+    }
+    curr->prev->next=curr->next;
+    if(curr->next!=NULL){
+        curr->next->prev=curr->prev;
+    }
+    delete curr;
+}
+int main(){
+    node* head=NULL;
+    insertattail(head,1);
+    insertattail(head,2);
+    insertattail(head,3);
+    insertattail(head,4);
+    insertattail(head,5);
+    display(head);
+   
+    deleteatposition(head,4);
+    display(head);
+    return 0;
+}
