@@ -1,0 +1,64 @@
+#include<iostream>
+#include<climits>
+using namespace std;
+class node{
+    public:
+    int data;
+    node* next;
+    node* prev;
+    
+    node(int val){
+        data=val;
+        next=NULL;
+        prev=NULL;
+    }
+};
+
+void insertattail(node* &head,int val){
+    if(head==NULL){
+        insertathead(head,val);
+        return ;
+    }
+    node* n=new node(val);
+    node* temp=head;
+    
+    while(temp->next!=NULL){
+        temp=temp->next;
+    }
+    temp->next=n;
+    n->prev=temp;
+}
+
+void deleteatend(node* &head){
+    if(head==NULL){
+        cout<<"the list is empty.cannot delete any element"<<endl;
+        return;
+    }
+    if(head->next==NULL){
+        delete head;
+        head=NULL;
+        return;
+    }
+    node* curr=head;
+    while(curr->next->next!=NULL){
+        curr=curr->next;
+    }
+    delete curr->next;
+    curr->next=NULL;
+}
+
+int main(){
+    node* head=NULL;
+    insertattail(head,1);
+    insertattail(head,2);
+    insertattail(head,3);
+    insertattail(head,4);
+    insertattail(head,5);
+    display(head);
+   
+   
+    deleteatend(head);
+    display(head);
+   
+    return 0;
+}
