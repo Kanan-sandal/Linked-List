@@ -1,0 +1,43 @@
+#include<iostream>
+using namespace std;
+class node{
+    public:
+    int data;
+    node* next;
+    
+    
+    node(int val){
+        data=val;
+        next=NULL;
+    }
+};
+class linkedlist{
+    public:
+    node* head;
+    linkedlist(){
+        head=nullptr;
+    }
+    void append(int val){
+        node* n=new node(val);
+        n->next=head;
+        head=n;
+        
+    }
+    void traverse(){
+        node* current=head;
+        while(current!=nullptr){
+            cout<<current->data<<" ";
+            current=current->next;
+        }
+        cout<<endl;
+    }
+};
+
+int main(){
+    linkedlist mylist;
+    mylist.append(1);
+    mylist.append(2);
+    mylist.append(3);
+    mylist.traverse();
+    return 0;
+}
