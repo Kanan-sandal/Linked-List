@@ -46,7 +46,14 @@ void deleteatend(node* &head){
     delete curr->next;
     curr->next=NULL;
 }
-
+void display(node* head){
+    node* temp=head;
+    while(temp!=NULL){
+        cout<<temp->data<<" ";
+        temp=temp->next;
+    }
+    cout<<endl;
+}
 int main(){
     node* head=NULL;
     insertattail(head,1);
