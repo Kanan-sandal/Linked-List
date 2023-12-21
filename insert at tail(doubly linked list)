@@ -22,12 +22,13 @@ void insertathead(node* &head,int val){
     head=n;
 }
 void insertattail(node* &head,int val){
+    node* n=new node(val);
+    node* temp=head;
     if(head==NULL){
         insertathead(head,val);
         return ;
     }
-    node* n=new node(val);
-    node* temp=head;
+    
     
     while(temp->next!=NULL){
         temp=temp->next;
