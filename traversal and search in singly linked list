@@ -1,0 +1,52 @@
+#include <iostream>
+using namespace std;
+struct node{
+    int data;
+    node* next;
+    
+    node(int val){
+        data=val;
+        next=NULL;
+    }
+};
+void traverse(node* head){
+    node* current=head;
+    while(current){
+        cout<<current->data<<" ";
+        current=current->next;
+    }
+    cout<<endl;
+}
+bool search(node* head,int target){
+    node* current=head;
+    while(current){
+        if(current->data==target){
+            return true;
+        }
+        current=current->next;
+    }
+    return false;
+}
+int main() {
+    node* head=new node(10);
+    node* secondnode=new node(20);
+    node* thirdnode=new node(30);
+    
+    head->next=secondnode;
+    secondnode->next=thirdnode;
+    
+    
+    traverse(head);
+    
+    int target;
+    cout<<"enter the element you want to search: "<<endl;
+    cin>>target;
+    if(search(head,target)){
+        cout<<"element found in the linked list"<<endl;
+    }
+    else{
+        cout<<"element not found in the linkd list"<<endl;
+    }
+    
+    return 0;
+}
