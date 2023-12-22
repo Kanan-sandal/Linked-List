@@ -1,0 +1,96 @@
+#include<iostream>
+using namespace std;
+class node{
+    public:
+    int data;
+    node* next;
+    
+    node(int val){
+        data=val;
+        next=NULL;
+    }
+};
+void traversalcircular(node* head){
+    if(head==NULL){
+        return;
+    }
+    node* current=head;
+    do{
+        cout<<current->data<<" ";
+        current=current->next;
+    }
+    while(current!=head);
+    
+    cout<<endl;
+}
+void insertathead(node* &head,int val){
+    node* n=new node(val);
+    if(head==NULL){
+        head=n;
+        head->next=head;
+    }
+    else{
+        node* current=head;
+        while(current->next!=head){
+            current=current->next;
+        }
+        n->next=head;
+        head=n;
+        current->next=head;
+    }
+}
+void insertatend(node* &head,int val){
+    node* n=new node(val);
+    if(head==NULL){
+        head=n;
+        head=head->next;
+    }
+    else{
+        node* current=head;
+        while(current->next!=head){
+            current=current->next;
+        }
+        current->next=n;
+        n->next=head;
+    }
+}
+void insertatposition(node* &head,int pos,int val){
+    if(pos<=0){
+        cout<<"invalid index!"<<endl;
+        return;
+    }
+    node* n=new node(val);
+    if(pos==1){
+        insertathead(head,val);
+        return;
+    }
+    else{
+        node* current=head;
+        for(int i=0;i<pos-1 && current!=NULL;++i){
+            current=current->next;
+        }
+        if(current==NULL){
+            cout<<"invalid position"<<endl;
+            delete n;
+            return;
+        }
+        n->next=current->next;
+        current->next=n;
+    }
+}
+int main(){
+    node* head=NULL;
+    insertathead(head,1);
+    insertathead(head,2);
+    insertathead(head,3);
+    
+    traversalcircular(head);
+    
+    insertatend(head,4);
+    traversalcircular(head);
+    
+    insertatposition(head,3,5);
+    traversalcircular(head);
+    
+    return 0;
+}
