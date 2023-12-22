@@ -1,0 +1,82 @@
+#include<iostream>
+using namespace std;
+class node{
+    public:
+    int data;
+    node* prev;
+    node* next;
+    
+    node(int val){
+        data=val;
+        prev=NULL;
+        next=NULL;
+    }
+};
+void traverseforward(node* head){
+    node* current=head;
+    while(current){
+        cout<<current->data<<" ";
+        current=current->next;
+    }
+    cout<<endl;
+}
+void traversebackward(node* tail){
+    node* current=tail;
+    while(current){
+        cout<<current->data<<" ";
+        current=current->prev;
+    }
+    cout<<endl;
+}
+bool searchforward(node* head,int target){
+    node* current=head;
+    while(current){
+        if(current->data==target){
+            return true;
+        }
+        current=current->next;
+    }
+    return false;
+}
+bool serachbackward(node* tail,int target){
+    node* current=tail;
+    while(current){
+        if(current->data==target){
+            return true;
+        }
+        current=current->prev;
+    }
+    return false;
+}
+int main(){
+    node* head=new node(10);
+    node* second=new node(20);
+    node* third=new node(30);
+    node* fourth=new node(40);
+    
+    head->next=second;
+    second->next=third;
+    third->next=fourth;
+    
+    fourth->prev=third;
+    third->prev=second;
+    second->prev=head;
+    
+    cout<<"forward traversal: "<<endl;
+    traverseforward(head);
+    
+    cout<<"backward traversal: "<<endl;
+    traversebackward(fourth);
+    
+    int target;
+    cout<<"enter the element you want to search: "<<endl;
+    cin>>target;
+    
+    if(searchforward(head,target)){
+        cout<<"element "<<target<<" found in the doubly linked list!"<<endl;
+    }
+    else{
+        cout<<"element "<<target<<" not found in the doubly linked list!"<<endl;
+    }
+    return 0;
+}
